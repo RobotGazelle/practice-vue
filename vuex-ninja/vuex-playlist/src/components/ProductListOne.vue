@@ -7,12 +7,18 @@
                 <span class="price">$ {{product.price}}</span>
             </li>
         </ul>
-        <button v-on:click="reducePrice">Reduce Price</button>
+        <input type="text" v-model="asd"/>
+        <button v-on:click="reducePrice()">Reduce Price</button>
     </div>
 </template>
 
 <script>
 export default {
+    data: function() {
+        return {
+            asd: null
+        }
+    },
     computed: {
         products(){
             return this.$store.state.products;
@@ -22,14 +28,15 @@ export default {
         }
     },
     methods: {
-        reducePrice: function() {
-            this.$store.state.products.forEach( product => {
-                product.price -= 1;
-            })
+        reducePrice: function(){
+            this.$store.dispatch('reducePrice', this.asd);
+            // this.$store.state.products.forEach( product => {
+            //     product.price -= 1;
             // this.$store.commit('reducePrice');
         }
     }
 }
+
 </script>
 
 <style scoped>
